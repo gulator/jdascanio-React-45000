@@ -1,0 +1,14 @@
+.contenedor {
+  display: flex;
+  background: none;
+}
+.icon {
+  filter: invert(100%) sepia(5%) saturate(412%) hue-rotate(214deg)
+    brightness(113%) contrast(92%);
+  background: none;
+  width: 25px;
+}
+.number {
+  color: red;
+  background: none;
+}
