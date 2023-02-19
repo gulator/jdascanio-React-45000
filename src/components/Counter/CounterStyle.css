@@ -1,0 +1,18 @@
+.contenedorCounter{
+    width: 20%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 3px !important;
+}
+
+.button{
+    margin: 2px 10px ;
+    border: 1px solid #282c34;
+    border-radius: 5px;
+    cursor: pointer;
+    color: #282c34;
+}
+.contenedor h3{
+    color: #282c34;
+}

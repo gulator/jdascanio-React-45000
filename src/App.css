@@ -1,5 +1,6 @@
 *{
   background-color: #111111;
+  
 }
 .App {
   text-align: center;
@@ -10,7 +11,8 @@
   pointer-events: none;
 }
 .App-Main{
-  height: calc(100vh - 100px);
+  margin-top: 10px;
+  /*height: calc(100vh - 100px);*/
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -18,10 +20,10 @@
 }
 
 .wine-logo{
+  
   margin-left: 20px;
-  border: 0px solid gray;
   border-radius: 50%;
-  width: 50px;
+  width: 60px;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -30,15 +32,7 @@
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  height: 100px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  font-size: 1rem;
-  color: #f5f5f5;
-}
+
 
 .App-link {
   color: #61dafb;

@@ -1,0 +1,19 @@
+.img404{
+    width: 100%;
+    height: calc(100vh - 110px);
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+background: linear-gradient(0deg, rgb(125, 116, 125), #ffffff);
+}
+.img404 h1{
+    font-size: 150px;
+    color: #350035;
+}
+.img404 h4{
+    text-transform: uppercase;
+    color: #350035;
+    font-size: 75;
+    letter-spacing: 2px;
+}

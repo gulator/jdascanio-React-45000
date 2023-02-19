@@ -1,0 +1,20 @@
+.contenedorItem{
+    height: calc(100vh - 100px);
+    display: flex;
+}
+.containerImgVino{
+    width: 35vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.imgVino{
+    height: calc(100vh - 170px);
+}
+.containerDetalles{
+    width: 65vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}

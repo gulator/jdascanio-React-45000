@@ -1,0 +1,19 @@
+.itemCard{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+.itemCardDetail{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.itemCardDetail a:link{
+    color: #282c34;
+}
+.itemCardDetail a:visited{
+    color: #282c34;
+}
+.itemCardDetail a:hover{
+    color: purple;
+}
