@@ -3,8 +3,12 @@ import "./styleNav.css";
 import { NavLink, Link } from "react-router-dom";
 import './styleNav.css'
 import Logo from "../Logo/Logo";
+import { useContext } from "react";
+import CartProvider from "../../context/CartProvider";
+import { CartContext } from "../../context/CartContext";
 
 export default function NavBar() {
+ 
   return (
     <div className="App-header">
       <Link to={'/'}>

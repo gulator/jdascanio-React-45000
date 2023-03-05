@@ -2,16 +2,14 @@ import { useState } from "react";
 import './CounterStyle.css'
 
 
-const Counter = () => {
-
-    const [counter, setCounter] = useState (0);
+const Counter = ({counter, setCounter}) => {
 
     const onAdd = () => {
         setCounter(counter + 1)
     }
 
     const onSubstract = () => {
-        if (counter <= 0){
+        if (counter <= 1){
 
         }
         else {
@@ -23,7 +21,9 @@ const Counter = () => {
         <div>
             <button className="button" onClick={onSubstract}> - </button>
         </div>        
-        <h3>{counter}</h3>
+        <div>
+            <span>{counter}</span>
+        </div>        
         <div>
             <button className="button" onClick={onAdd}> + </button>
         </div>        

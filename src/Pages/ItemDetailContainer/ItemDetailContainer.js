@@ -6,7 +6,6 @@ import vinos from "../../data/vinos";
 const ItemDetailContainer = () => {
     const {id} = useParams();
     const [seleccion, setSeleccion] = useState({});
-    console.log(id)
     const getProduct = new Promise((res, rej) =>{
         setTimeout (() => {
             const findProducto = vinos.find (vino => vino.id == id)
@@ -15,7 +14,6 @@ const ItemDetailContainer = () => {
     })
     useEffect (() => {
         getProduct.then((response)=> {
-            console.log(response)
             setSeleccion(response)
         })
         .catch ((error)=> {

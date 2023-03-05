@@ -1,0 +1,25 @@
+.listadoCarrito{
+    display: flex;
+    align-items: center;
+
+}
+
+.listadoCarrito img{
+    height: 24px;
+}
+.carroVacio{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - 100px);
+    font-size: 50px;
+    text-transform: uppercase;
+    font-style: italic;
+    font-weight: 800;
+    padding-top: 20px;
+    color: #e7e6e6;
+}
+.carroVacio img{
+    height: 450px;
+}

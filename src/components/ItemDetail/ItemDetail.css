@@ -16,5 +16,30 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: center;    
+}
+.contBotonesDetalle{
+    margin-top: 20px;
+    width: 75%;
+    display: flex;
+    justify-content: space-evenly;
+}
+.botonesDetalle{
+    cursor: pointer;
+    height: 40px;
+    width: 150px;
+    border: 1px solid #4d004d;
+    background: #fafafa;
+    border-radius: 8px;
+    margin: 5px;
+    color: #4d004d;
+    transition: 200ms;
+}
+.botonesDetalle:hover{
+    background: #4d004d;
+    color: #fafafa;
+}
+.botonesDetalle:active{
+    background: #320032;
+    color: #fafafa;
 }
