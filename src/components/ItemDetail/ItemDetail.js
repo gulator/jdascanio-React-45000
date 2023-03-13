@@ -16,7 +16,6 @@ const ItemDetail = ({ vino }) => {
   //     alert("La cantidad debe ser mayor a cero");
   //   }
   // };
-
   return (
     <div className="contenedorItem">
       <div className="containerImgVino">
@@ -24,17 +23,29 @@ const ItemDetail = ({ vino }) => {
       </div>
       <div className="containerDetalles">
         <h2>{vino.nombre}</h2>
-        <h5>Bodega:{vino.bodega}</h5>
+        <h5>Bodega: {vino.bodega}</h5>
         <h5>Origen: {vino.origen}</h5>
         <h5>Origen: {vino.varietal}</h5>
         <h2>Precio: ${vino.precio}</h2>
-        <p>Agregar al carrito: </p>
-        <Counter counter={counter} setCounter={setCounter} />
+       {
+         vino.stock !==0 && (
+          <>
+          <p>Agregar al carrito: </p>
+          <Counter counter={counter} setCounter={setCounter} />
+          </>
+        )
+       }
+       {
+        vino.stock === 0 && (
+          <h3>Producto sin stock</h3>
+        )
+       }
         <div className="contBotonesDetalle">
           <button className="botonesDetalle" onClick={() => navigate("/")}>
             Continuar comprando
           </button>
           <button
+            disabled={counter > vino.stock}
             className="botonesDetalle"
             onClick={() => addItem(vino, counter)}
           >

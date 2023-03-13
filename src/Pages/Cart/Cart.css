@@ -1,9 +1,26 @@
 .listadoCarrito {
+  width: 90vw;
   margin-left: 50px;
   margin-right: 50px;
   display: flex;
   flex-direction: column;
   justify-content: center;
+}
+section {
+  width: 90vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.contBotonesCart {
+  display: flex;
+  width: 90vw;
+  justify-content: space-between;
+}
+.formCart {
+  display: flex;
+  width: 90vw;
+  justify-content: space-between;
 }
 .listadoCarrito td,
 th {
@@ -17,24 +34,29 @@ th {
 .listadoCarrito tr:nth-child(even) {
   background-color: #f3f3f3;
 }
+.blank {
+  background-color: white !important;
+}
 
 .removeItem {
-    filter: invert(21%) sepia(86%) saturate(7447%) hue-rotate(3deg) brightness(113%) contrast(128%);
-    cursor: pointer;
+  filter: invert(21%) sepia(86%) saturate(7447%) hue-rotate(3deg)
+    brightness(113%) contrast(128%);
+  cursor: pointer;
   height: 24px;
 }
-.vaciar{
-    color: #ff0000;
-    filter: invert(21%) sepia(86%) saturate(7447%) hue-rotate(3deg) brightness(113%) contrast(128%);
-    cursor: pointer;
-    height: 30px;
+.vaciar {
+  color: #ff0000;
+  filter: invert(21%) sepia(86%) saturate(7447%) hue-rotate(3deg)
+    brightness(113%) contrast(128%);
+  cursor: pointer;
+  height: 30px;
 }
-.campoVaciar{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 10px !important;
-    font-weight: 400 !important;
+.campoVaciar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 10px !important;
+  font-weight: 400 !important;
 }
 .imgProdCarrito {
   height: 80px;
@@ -62,10 +84,9 @@ th {
 .carroVacio img {
   height: 450px;
 }
-.tablaTotal{
-    background-color: #dedddd;
-    
+.tablaTotal {
+  background-color: #dedddd;
 }
-.currSign::before{
-    content: '$';
+.currSign::before {
+  content: "$";
 }

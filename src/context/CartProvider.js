@@ -17,8 +17,7 @@ const CartProvider = ({children}) => {
             }
         })
         setCart (newCart)
-    }else {
-    
+    }else {    
             const producto = {
                 id : item.id,
                 nombre : item.nombre,
@@ -26,6 +25,7 @@ const CartProvider = ({children}) => {
                 precio : item.precio,
                 image : item.image,
                 cantidad: cantidad,
+                stock: item.stock,
                 total: cantidad * item.precio
              }       
              setCart([...cart, producto])

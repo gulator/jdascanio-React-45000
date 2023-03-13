@@ -43,3 +43,8 @@
     background: #320032;
     color: #fafafa;
 }
+.botonesDetalle:disabled{
+    background-color: #cccccc;
+    border: 1px solid #cccccc;
+    cursor: not-allowed;
+}
