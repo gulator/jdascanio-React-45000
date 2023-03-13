@@ -16,11 +16,34 @@ section {
   display: flex;
   width: 90vw;
   justify-content: space-between;
+  align-items: centers;
+}
+
+.cartInput{
+  box-sizing: border-box;
+  height: 40px;
+  border: 1px solid #cecece;
+  border-radius: 8px;
+  padding-left: 10px;
+  margin: 5px;
+  transition: 300ms;
+  width: 30%
+}
+.cartInput:hover{
+  border: 1px solid #4d004d;
+  outline: none;
+}
+.cartInput:focus{
+  outline: 1px solid #4d004d;
+  outline-width: thin;
+  background-color: #f1e9f1;
+  border: none;
 }
 .formCart {
   display: flex;
   width: 90vw;
   justify-content: space-between;
+  align-items: center;
 }
 .listadoCarrito td,
 th {

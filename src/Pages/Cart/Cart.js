@@ -4,11 +4,22 @@ import "./Cart.css";
 import carritoVacio from "../../img/empty-cart.jpg";
 import remover from "../../img/remove.svg";
 import vaciar from "../../img/empty.svg";
-import { collection, addDoc, getFirestore, doc, updateDoc } from "firebase/firestore";
+import {
+  collection,
+  addDoc,
+  getFirestore,
+  doc,
+  updateDoc,
+} from "firebase/firestore";
 
 const Cart = () => {
   const { cart, clear, removerItem } = useContext(CartContext);
-  const [totalCarrito, setTotalCarrito] = useState(0);  
+  const [totalCarrito, setTotalCarrito] = useState(0);
+  const [formValue, setFormValue] = useState({
+    name: "",
+    phone: "",
+    email: "",
+  });
   useEffect(() => {
     setTotalCarrito(cart.reduce((a, b) => a + b.total, 0));
   }, [cart]);
@@ -18,54 +29,86 @@ const Cart = () => {
     const db = getFirestore();
     const querySnap = collection(db, "orders");
 
-    addDoc(querySnap, {
-      buyer: {
-        name: "Armando Esteban Quito",
-        phone: "1155558888",
-        email: "aeq@mail.com",
-      },
-      productos: cart.map((producto) => {
-        return {
-          nombre: producto.nombre,
-          cantidad: producto.cantidad,
-          id: producto.id,
-          precio: producto.precio,
-        };
-      }),
-      total: cart.reduce((a, b) => a + b.cantidad * b.precio, 0),
-    })
-      .then((response) => {
-        console.log(response.id);
-        alert(`Orden creada con ID: ${response.id}`);
-        updateStock()
+    if (!formValue.name || !formValue.phone || !formValue.email){
+      alert('complete todos los campos para finalizar la compra')
+    }else{
+      addDoc(querySnap, {
+        buyer: {
+          name: formValue.name,
+          phone: formValue.phone,
+          email: formValue.email,
+        },
+        productos: cart.map((producto) => {
+          return {
+            nombre: producto.nombre,
+            cantidad: producto.cantidad,
+            id: producto.id,
+            precio: producto.precio,
+          };
+        }),
+        total: cart.reduce((a, b) => a + b.cantidad * b.precio, 0),
       })
-      .catch((error) => console.log(error));
+        .then((response) => {
+          alert(`Orden creada con ID: ${response.id}`);
+          updateStock(db);
+        })
+        .catch((error) => console.log(error));
+
+    }
+
   };
 
-  const updateStock = () => {
-    const db = getFirestore()
+  const updateStock = (db) => {
     cart.forEach((producto) => {
-      const querySnap = doc (db, 'productos', producto.id)
+      const querySnap = doc(db, "productos", producto.id);
       updateDoc(querySnap, {
-        stock: producto.stock - producto.cantidad
+        stock: producto.stock - producto.cantidad,
       })
-      .then(() => {})
-      .catch((error) => console.log(error))
+        .then(() => {})
+        .catch((error) => console.log(error));
     });
-  }
+  };
 
+  const datosUsuario = (e) => {
+    console.log (e.target.value)
+    setFormValue ({
+      ...formValue,
+      [e.target.name]: e.target.value,
+    })
+  };
   return (
     <div className="listadoCarrito">
       {cart.length > 0 && (
         <section>
           <div className="contBotonesCart">
             <form className="formCart">
-            <input type="text" placeholder="Nombre" name="nombre" />
-            <input type="text" placeholder="telefono" name="telefono" />
-            <input type="email" placeholder="email" name="email" />
-            <button onClick={createOrder} className="botonesDetalle">
-              Finalizar compra
-            </button>
+              <input
+                className="cartInput"
+                type="text"
+                placeholder="Nombre"
+                value={formValue.name}
+                onChange={datosUsuario}
+                name="name"
+              />
+              <input
+                className="cartInput"
+                type="text"
+                placeholder="telefono"
+                value={formValue.phone}
+                onChange={datosUsuario}
+                name="phone"
+              />
+              <input
+                className="cartInput"
+                type="email"
+                placeholder="email"
+                value={formValue.email}
+                onChange={datosUsuario}
+                name="email"
+              />
+              <button onClick={createOrder} className="botonesDetalle">
+                Finalizar compra
+              </button>
             </form>
           </div>
           <table>
