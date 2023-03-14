@@ -1,4 +1,4 @@
-![](./under-construction.gif)(width='400px')
+![](./under-construction.gif){width='400px'}
 
 # Tienda de vinos 
 Sitio de venta de vinos premium de varias partes del mundo
