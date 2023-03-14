@@ -11,6 +11,8 @@ import {
   doc,
   updateDoc,
 } from "firebase/firestore";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
 
 const Cart = () => {
   const { cart, clear, removerItem } = useContext(CartContext);
@@ -24,14 +26,33 @@ const Cart = () => {
     setTotalCarrito(cart.reduce((a, b) => a + b.total, 0));
   }, [cart]);
 
+  const sweetAlert = ({ response }) => {
+    const MySwal = withReactContent(Swal);
+
+    const itemsComprados = cart.map((producto) => {
+      let detalleProducto = `${producto.nombre} x ${producto.cantidad} u.<br>`
+      return (
+        detalleProducto
+      );
+    });
+    MySwal.fire({
+      position: "center",
+      icon: "success",
+      title: `Se ha procesado tu compra con ID: ${response.id}`,
+      html: `<h3>Tu compra:</h3><h4>${itemsComprados}</h4><h3>Total: $ ${totalCarrito}</h3>`,
+      showConfirmButton: false,
+      timer: 8500,      
+    });
+  };
+
   const createOrder = (e) => {
     e.preventDefault();
     const db = getFirestore();
     const querySnap = collection(db, "orders");
 
-    if (!formValue.name || !formValue.phone || !formValue.email){
-      alert('complete todos los campos para finalizar la compra')
-    }else{
+    if (!formValue.name || !formValue.phone || !formValue.email) {
+      alert("complete todos los campos para finalizar la compra");
+    } else {
       addDoc(querySnap, {
         buyer: {
           name: formValue.name,
@@ -49,19 +70,17 @@ const Cart = () => {
         total: cart.reduce((a, b) => a + b.cantidad * b.precio, 0),
       })
         .then((response) => {
-          alert(`Orden creada con ID: ${response.id}`);
+          sweetAlert({ response });
           updateStock(db);
         })
         .catch((error) => console.log(error));
-
     }
-
   };
 
   const updateStock = (db) => {
     cart.forEach((producto) => {
       const querySnap = doc(db, "productos", producto.id);
-      updateDoc(querySnap, {
+      updateDoc(querySnap, {        
         stock: producto.stock - producto.cantidad,
       })
         .then(() => {})
@@ -70,11 +89,10 @@ const Cart = () => {
   };
 
   const datosUsuario = (e) => {
-    console.log (e.target.value)
-    setFormValue ({
+    setFormValue({
       ...formValue,
       [e.target.name]: e.target.value,
-    })
+    });
   };
   return (
     <div className="listadoCarrito">

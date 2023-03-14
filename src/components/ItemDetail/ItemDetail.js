@@ -3,11 +3,32 @@ import Counter from "../Counter/Counter";
 import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { CartContext } from "../../context/CartContext";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+
 
 const ItemDetail = ({ vino }) => {
   const navigate = useNavigate();
   const { addItem } = useContext(CartContext);
   const [counter, setCounter] = useState(1);
+
+  
+  const showToastMessage = () => {
+    toast.success(`Se agregó ${vino.nombre} x ${counter}u.`, {
+      position: toast.POSITION.BOTTOM_RIGHT,
+      autoClose: 3000,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: true,
+      theme: "colored",
+    });
+  };
+  const funciones = () => {
+    addItem(vino, counter);
+    showToastMessage();
+  };
+
   // const addToCart = (e) => {
   //   e.preventDefault();
   //   if (counter !== 0) {
@@ -27,19 +48,13 @@ const ItemDetail = ({ vino }) => {
         <h5>Origen: {vino.origen}</h5>
         <h5>Origen: {vino.varietal}</h5>
         <h2>Precio: ${vino.precio}</h2>
-       {
-         vino.stock !==0 && (
+        {vino.stock !== 0 && (
           <>
-          <p>Agregar al carrito: </p>
-          <Counter counter={counter} setCounter={setCounter} />
+            <p>Agregar al carrito: </p>
+            <Counter counter={counter} setCounter={setCounter} />
           </>
-        )
-       }
-       {
-        vino.stock === 0 && (
-          <h3>Producto sin stock</h3>
-        )
-       }
+        )}
+        {vino.stock === 0 && <h3>Producto sin stock</h3>}
         <div className="contBotonesDetalle">
           <button className="botonesDetalle" onClick={() => navigate("/")}>
             Continuar comprando
@@ -47,7 +62,7 @@ const ItemDetail = ({ vino }) => {
           <button
             disabled={counter > vino.stock}
             className="botonesDetalle"
-            onClick={() => addItem(vino, counter)}
+            onClick={() => funciones()}
           >
             Agregar al carrrito
           </button>
@@ -59,6 +74,7 @@ const ItemDetail = ({ vino }) => {
           </button>
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 };

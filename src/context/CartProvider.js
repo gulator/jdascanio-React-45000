@@ -4,15 +4,14 @@ import { useState } from "react"
 const CartProvider = ({children}) => {
 
     const [cart, setCart] = useState ([])
-
     const addItem = (item, cantidad, total) => {
     if (isInCart (item.id)) {
         const newCart = cart.map ((producto) => {
             if (producto.id === item.id){
                 producto.cantidad = producto.cantidad + cantidad
-                producto.total = producto.cantidad * producto.precio
+                producto.total = producto.cantidad * producto.precio                
                 return producto
-            }else{
+            }else{                
                 return producto
             }
         })
