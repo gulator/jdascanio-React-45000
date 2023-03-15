@@ -18,12 +18,14 @@ export default function ItemListContainer() {
       
     getDocs(querySnap)
     .then((response) => {
-      const vinos = response.docs.map((doc) => {
-        return {
-          id: doc.id, ...doc.data()
-        }        
-      })
-      setListaProductos(vinos) 
+      if (response.docs.length !== 0){
+        const vinos = response.docs.map((doc) => {
+          return {
+            id: doc.id, ...doc.data()
+          }        
+        })
+        setListaProductos(vinos)
+      }
     })
     .catch((error) => console.log (error))
   }  

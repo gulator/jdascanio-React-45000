@@ -26,7 +26,7 @@ const Cart = () => {
     setTotalCarrito(cart.reduce((a, b) => a + b.total, 0));
   }, [cart]);
 
-  const sweetAlert = ({ response }) => {
+  const orderSaved = ({ response }) => {
     const MySwal = withReactContent(Swal);
 
     const itemsComprados = cart.map((producto) => {
@@ -41,7 +41,36 @@ const Cart = () => {
       title: `Se ha procesado tu compra con ID: ${response.id}`,
       html: `<h3>Tu compra:</h3><h4>${itemsComprados}</h4><h3>Total: $ ${totalCarrito}</h3>`,
       showConfirmButton: false,
-      timer: 8500,      
+      timer: 5500,      
+    });
+  };
+
+  const missingInputs = () => {
+    const MySwal = withReactContent(Swal);
+    
+    MySwal.fire({
+      position: "center",
+      icon: "warning",
+      title: "Complete sus datos",
+      text: "Complete todos los campos para finalizar la compra",
+      
+      showConfirmButton: true,
+      timer: 5500,      
+    });
+  };
+
+  const mailError = () => {
+    const MySwal = withReactContent(Swal);
+    
+    MySwal.fire({
+      position: "center",
+      icon: "error",
+      title: "Oops...",
+      text: "Los campos de email no coinciden",
+      color: 'white',
+      background: 'red',
+      showConfirmButton: true,
+      timer: 5500,      
     });
   };
 
@@ -51,8 +80,13 @@ const Cart = () => {
     const querySnap = collection(db, "orders");
 
     if (!formValue.name || !formValue.phone || !formValue.email) {
-      alert("complete todos los campos para finalizar la compra");
-    } else {
+      missingInputs()
+    }
+    else if (formValue.email !== formValue.emailChk){
+      mailError()
+      }
+    
+    else {
       addDoc(querySnap, {
         buyer: {
           name: formValue.name,
@@ -70,8 +104,9 @@ const Cart = () => {
         total: cart.reduce((a, b) => a + b.cantidad * b.precio, 0),
       })
         .then((response) => {
-          sweetAlert({ response });
+          orderSaved({ response });
           updateStock(db);
+          clear()
         })
         .catch((error) => console.log(error));
     }
@@ -87,6 +122,8 @@ const Cart = () => {
         .catch((error) => console.log(error));
     });
   };
+
+ 
 
   const datosUsuario = (e) => {
     setFormValue({
@@ -123,6 +160,14 @@ const Cart = () => {
                 value={formValue.email}
                 onChange={datosUsuario}
                 name="email"
+              />
+              <input
+                className="cartInput"
+                type="email"
+                placeholder="repita su mail"
+                value={formValue.emailChk}
+                onChange={datosUsuario}
+                name="emailChk"
               />
               <button onClick={createOrder} className="botonesDetalle">
                 Finalizar compra
