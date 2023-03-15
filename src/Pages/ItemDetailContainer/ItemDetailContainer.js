@@ -12,35 +12,21 @@ const ItemDetailContainer = () => {
   const getProduct = () => {
     const db = getFirestore();
     const query = doc(db, "productos", id);
-    getDoc(query)
-      .then((res) => {
-        if (res.exists()) {
-          setSeleccion({
-            id: res.id,
-            ...res.data(),
-          });
-        }else {
-          setSeleccion('error')
-        }
-      })
-      .then(() => {
-        console.log(seleccion);
-      })
-      //   console.log(seleccion)
-      //   setSelected(<ItemDetail vino={seleccion} />);
-      //   console.log(selected)
-      // } else {
-      //   setSelected(<NoLink />);
-      // }
-      // const vinos = response.docs.map((doc) => {
-      //   return {
-      //     id: doc.id, ...doc.data()
-      //   }
-      // })
-      // const findProducto = vinos.find (vino => vino.id === id)
-      // setSeleccion(findProducto)
-
-      .catch((error) => console.log(error));
+    async function prodSelection() {
+      let result = new Promise(function (res) {
+        res(getDoc(query));
+      });
+      let queryDoc = await result;
+      if (queryDoc.exists()) {
+        setSeleccion({
+          id: queryDoc.id,
+          ...queryDoc.data(),
+        });
+      } else {
+        setSeleccion("error");
+      }
+    }
+    prodSelection();
   };
 
   useEffect(() => {
@@ -49,8 +35,10 @@ const ItemDetailContainer = () => {
   }, [id]);
 
   useEffect(() => {
-    seleccion !== 'error' ? setSelected(<ItemDetail vino={seleccion} />) : setSelected(<NoLink />);
-  }, [seleccion])
+    seleccion !== "error"
+      ? setSelected(<ItemDetail vino={seleccion} />)
+      : setSelected(<NoLink />);
+  }, [seleccion]);
 
   return <div>{selected}</div>;
 };

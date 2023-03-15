@@ -6,12 +6,12 @@ import { Link } from "react-router-dom";
 
 export default function CartWidget() {
   const { cart } = useContext(CartContext);
-  
-  const [total, setTotal] = useState (0)
+
+  const [total, setTotal] = useState(0);
 
   useEffect(() => {
-    setTotal (cart.reduce ((a, b) => a + b.cantidad, 0 ))
-  }, [cart])
+    setTotal(cart.reduce((a, b) => a + b.cantidad, 0));
+  }, [cart]);
 
   return (
     <div className="contenedor">

@@ -6,7 +6,6 @@ import { CartContext } from "../../context/CartContext";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-
 const ItemDetail = ({ vino }) => {
   const navigate = useNavigate();
   const { addItem } = useContext(CartContext);
@@ -26,15 +25,6 @@ const ItemDetail = ({ vino }) => {
     addItem(vino, counter);
     showToastMessage();
   };
-
-  // const addToCart = (e) => {
-  //   e.preventDefault();
-  //   if (counter !== 0) {
-  //     console.log({ ...vino, cantidad: counter });
-  //   } else {
-  //     alert("La cantidad debe ser mayor a cero");
-  //   }
-  // };
 
   if (vino.id) {
     return (

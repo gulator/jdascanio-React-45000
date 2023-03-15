@@ -30,10 +30,8 @@ const Cart = () => {
     const MySwal = withReactContent(Swal);
 
     const itemsComprados = cart.map((producto) => {
-      let detalleProducto = `${producto.nombre} x ${producto.cantidad} u.<br>`
-      return (
-        detalleProducto
-      );
+      let detalleProducto = `${producto.nombre} x ${producto.cantidad} u.<br>`;
+      return detalleProducto;
     });
     MySwal.fire({
       position: "center",
@@ -41,36 +39,36 @@ const Cart = () => {
       title: `Se ha procesado tu compra con ID: ${response.id}`,
       html: `<h3>Tu compra:</h3><h4>${itemsComprados}</h4><h3>Total: $ ${totalCarrito}</h3>`,
       showConfirmButton: false,
-      timer: 5500,      
+      timer: 5500,
     });
   };
 
   const missingInputs = () => {
     const MySwal = withReactContent(Swal);
-    
+
     MySwal.fire({
       position: "center",
       icon: "warning",
       title: "Complete sus datos",
       text: "Complete todos los campos para finalizar la compra",
-      
+
       showConfirmButton: true,
-      timer: 5500,      
+      timer: 5500,
     });
   };
 
   const mailError = () => {
     const MySwal = withReactContent(Swal);
-    
+
     MySwal.fire({
       position: "center",
       icon: "error",
       title: "Oops...",
       text: "Los campos de email no coinciden",
-      color: 'white',
-      background: 'red',
+      color: "white",
+      background: "red",
       showConfirmButton: true,
-      timer: 5500,      
+      timer: 5500,
     });
   };
 
@@ -80,13 +78,10 @@ const Cart = () => {
     const querySnap = collection(db, "orders");
 
     if (!formValue.name || !formValue.phone || !formValue.email) {
-      missingInputs()
-    }
-    else if (formValue.email !== formValue.emailChk){
-      mailError()
-      }
-    
-    else {
+      missingInputs();
+    } else if (formValue.email !== formValue.emailChk) {
+      mailError();
+    } else {
       addDoc(querySnap, {
         buyer: {
           name: formValue.name,
@@ -106,7 +101,7 @@ const Cart = () => {
         .then((response) => {
           orderSaved({ response });
           updateStock(db);
-          clear()
+          clear();
         })
         .catch((error) => console.log(error));
     }
@@ -115,15 +110,13 @@ const Cart = () => {
   const updateStock = (db) => {
     cart.forEach((producto) => {
       const querySnap = doc(db, "productos", producto.id);
-      updateDoc(querySnap, {        
+      updateDoc(querySnap, {
         stock: producto.stock - producto.cantidad,
       })
         .then(() => {})
         .catch((error) => console.log(error));
     });
   };
-
- 
 
   const datosUsuario = (e) => {
     setFormValue({
@@ -208,12 +201,6 @@ const Cart = () => {
                     />
                   </td>
                 </tr>
-                // <div key={producto.id} className="itemCarrito">
-                //   <img className="imgProdCarrito" src={producto.image} alt=""/>
-                //   <h3>{producto.nombre}</h3>
-                //   <h4>{producto.cantidad}</h4>
-                //   <img className="removeItem" onClick={()=> removerItem (producto.id)} src={remover} alt=""/>
-                // </div>
               ))}
               <tr className="blank">
                 <td className="blank"></td>
