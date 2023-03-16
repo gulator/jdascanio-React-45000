@@ -1,4 +1,4 @@
-![](./under-construction.gif)
+![](./proyecto-react-45000.gif)
 
 # Tienda de vinos 
 Sitio de venta de vinos premium de varias partes del mundo.\
@@ -8,7 +8,7 @@ Valor de los precios expresados en pesos argentinos.\
 Se podrá visualizar el deploy de esta app en: https://wine-app-umber.vercel.app/
 
 # Librerias utilizadas
-Sweetalert\
+Sweetalert\ 
 toastify\
 firebase
 
