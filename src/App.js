@@ -18,10 +18,7 @@ function App() {
           <Route path="/" element={<Logo />} />
           <Route path="item/:id" element={<ItemDetailContainer />} />
           <Route element={<NoLink />} />
-          <Route
-            path="/categoria/:IDcategoria"
-            element={<ItemListContainer />}
-          />
+          <Route path="/categoria/:IDcategoria" element={<ItemListContainer />} />
           <Route path="/carrito" element={<Cart />} />
           <Route path="*" element={<NoLink />} />
         </Routes>
